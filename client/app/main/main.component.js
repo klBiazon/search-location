@@ -21,6 +21,7 @@ export class MainController {
   $onInit() {
     let marker;
 
+    // Rendering the map, locate its initial position and add the marker on it
     function initializeMap(pos) {
       var position = {
         lat: pos.coords.latitude,
@@ -41,6 +42,7 @@ export class MainController {
       marker.addListener('click', toggleBounce);
     }
 
+    // Just an animation for the marker when clicked (TOGGLE MARKER BOUNCE ANIMATION)
     function toggleBounce() {
       if(marker.getAnimation() !== null) {
         marker.setAnimation(null);
@@ -49,6 +51,7 @@ export class MainController {
       }
     }
 
+    // Get the current position of the user using 'navigator'
     function currentPosition() {
       navigator.geolocation.getCurrentPosition(pos => {
         initializeMap(pos);

@@ -3,15 +3,13 @@ import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
 
 export class MainController {
-  $http;
-  socket;
-  awesomeThings = [];
-  newThing = '';
 
   /*@ngInject*/
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, googleKey) {
+    this.$scope = $scope;
     this.$http = $http;
     this.socket = socket;
+    this.googleKey = googleKey;
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('thing');
@@ -19,24 +17,50 @@ export class MainController {
   }
 
   $onInit() {
-    this.$http.get('/api/things')
-      .then(response => {
-        this.awesomeThings = response.data;
-        this.socket.syncUpdates('thing', this.awesomeThings);
-      });
-  }
+    var googleMapsClient = require('@google/maps').createClient({
+      key: this.googleKey.apiKey,
+      Promise
+    });
 
-  addThing() {
-    if(this.newThing) {
-      this.$http.post('/api/things', {
-        name: this.newThing
+    let marker;
+
+    function initializeMap(pos) {
+      var position = {
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude
+      };
+
+      var map = new google.maps.Map(document.getElementById('googleMap'), {
+        center: position,
+        zoom: 15
       });
-      this.newThing = '';
+
+      marker = new google.maps.Marker({
+        position,
+        map,
+        animation: google.maps.Animation.DROP,
+        title: 'Here we are!'
+      });
+      marker.addListener('click', toggleBounce);
     }
-  }
 
-  deleteThing(thing) {
-    this.$http.delete(`/api/things/${thing._id}`);
+    function toggleBounce() {
+      if(marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+
+    function currentPosition() {
+      navigator.geolocation.getCurrentPosition(pos => {
+        initializeMap(pos);
+      }, error => {
+        console.log('Unable to get location: ', error.message);
+      }, {enableHighAccuracy: true});
+    }
+
+    currentPosition();
   }
 }
 

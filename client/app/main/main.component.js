@@ -1,3 +1,5 @@
+/*global google */
+
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routing from './main.routes';
@@ -17,11 +19,6 @@ export class MainController {
   }
 
   $onInit() {
-    var googleMapsClient = require('@google/maps').createClient({
-      key: this.googleKey.apiKey,
-      Promise
-    });
-
     let marker;
 
     function initializeMap(pos) {

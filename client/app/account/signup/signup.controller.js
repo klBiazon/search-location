@@ -26,6 +26,11 @@ export default class SignupController {
     this.$state = $state;
   }
 
+  $onInit() {
+    this.showPassword = false;
+    this.showConfirmPassword = false;
+  }
+
   register(form) {
     this.submitted = true;
 

@@ -9,7 +9,27 @@
  */
 
 body {
-	background-color: #dadada;
+  background-color: #dadada;
+}
+
+input[type=text]:hover, input[type=email]:hover, input[type=password]:hover {
+  background-color: #efefef;
+}
+
+input[type=text]:focus, input[type=email]:focus, input[type=password]:focus {
+  background-color: #ffffff;
+}
+
+.app-default-btn, .app-default-btn:active, .app-default-btn:focus {
+  background-color: #424242;
+  color: #ffffff;
+  border: 0px;
+  margin-bottom: 10px;
+}
+
+.has-error {
+  border: 1px solid #ff5252;
+  background-color: #ff000005;
 }
 
 .browserupgrade {
@@ -20,6 +40,7 @@ body {
 }
 
 /* inject:less */
+@import 'account/login/login';
 @import 'admin/admin';
 @import 'main/main';
 @import '../components/footer/footer';

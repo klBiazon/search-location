@@ -5,10 +5,13 @@
     border-bottom: 1px solid #1010102e;
 }
 
-.logo-header {
-    padding: 10px 10px;
-    font-size: 18px;
+.logo-header, #navbar-main {
     height: 50px;
+    color: #ffffffc4;
+
+    .logo-contents {
+        padding: 10px 10px;
+    }
 
     .logo {
         position: relative;
@@ -16,22 +19,12 @@
         opacity: 0.6;
     }
 
-    a {
-        text-decoration: none;
-    }
-
-    span {
-        color: #ffffffc4;
+    .logo-text {
+        font-size: 18px;
     }
 }
 
-#login, #signup {
-    span {
-        color: #ffffffc4;
-    }
-}
-
-.logo-header:hover, #login:hover, #signup:hover {
+.logo-header:hover, #login:hover, #signup:hover, ul > li:hover, li.active {
     cursor: pointer;
     background-color: #424242;
 
@@ -42,4 +35,8 @@
     span {
         color: #ffffff;
     }
+}
+
+ul > li {
+    padding: 15px;
 }

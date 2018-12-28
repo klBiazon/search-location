@@ -26,7 +26,12 @@ export default class LoginController {
     this.$state = $state;
   }
 
+  $onInit() {
+    this.showPassword = false;
+  }
+
   login(form) {
+    this.error = false;
     this.submitted = true;
 
     if(form.$valid) {
@@ -39,6 +44,7 @@ export default class LoginController {
           this.$state.go('main');
         })
         .catch(err => {
+          this.error = true;
           this.errors.login = err.message;
         });
     }

@@ -1,13 +1,40 @@
 <div class="container">
-  <form class="">
-  </form>
   <div class="row map col-xs-12 col-md-6" id="googleMap">
   </div>
-  <div class="col-xs-12 col-md-6">
-    <input type="text" id="texts" ng-model="$ctrl.sample">
-<!--     <input type="text"
-      ng-model="ctrl.colorName"
-      placeholder="Color Name. Try 'r' or 'b'"
-      auto-complete="ctrl.autoCompleteOptions" /> -->
+  <div class="direction-inputs col-xs-12 col-md-6">
+    <div class="panel">
+      <div class="panel-body">
+        <form class="form main" name="form">
+          <uib-tabset active="activeForm">
+            <uib-tab index="0" heading="Get Direction">
+              <div class="form-group">
+                <label>Origin</label>
+                <label> (from)</label>
+                <div class="checkbox current-location-cbox">
+                  <label>
+                    <input type="checkbox" ng-model="$ctrl.originCurrent" ng-disabled="$ctrl.endCurrent" ng-click="$ctrl.toggleCurrentLocation('origin', $ctrl.originCurrent)"> Current location
+                  </label>
+                </div>
+                <input type="text" id="origin" class="form-control login-inputs" ng-model="$ctrl.origin" ng-class="{'has-error' : $ctrl.error.origin}" ng-readonly="$ctrl.originCurrent">
+                <small class="validation-message" ng-if="$ctrl.error.origin" ng-bind="'Please enter a valid location'"></small>
+              </div>
+              <div class="form-group">
+                <label>End</label>
+                <label> (where)</label>
+                <div class="checkbox current-location-cbox">
+                  <label>
+                    <input type="checkbox" ng-model="$ctrl.endCurrent" ng-disabled="$ctrl.originCurrent" ng-click="$ctrl.toggleCurrentLocation('end', $ctrl.endCurrent)"> Current location
+                  </label>
+                </div>
+                <input type="text" id="end" class="form-control login-inputs" ng-model="$ctrl.end" ng-class="{'has-error' : $ctrl.error.end}" ng-readonly="$ctrl.endCurrent">
+                <small class="validation-message" ng-if="$ctrl.error.end" ng-bind="'Please enter a valid location'"></small>
+              </div>
+            </uib-tab>
+            <uib-tab index="1" heading="Saved locations" ng-if="$ctrl.logged()">
+            </uib-tab>
+          </uib-tabset>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

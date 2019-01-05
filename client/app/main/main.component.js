@@ -130,8 +130,8 @@ export class MainController {
         this.error[elem.id] = false;
         this.$scope.$apply();
 
-        // User entered the name of a Place that was not suggested and
-        // pressed the Enter key, or the Place Details request failed.
+        /** User entered the name of a Place that was not suggested and
+           pressed the Enter key, or the Place Details request failed. */
         if (!place.geometry) {
           this.error[elem.id] = true;
           this.deleteMarker(elem.id);
